@@ -1,0 +1,76 @@
+﻿@inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
+
+<!-- Este sería el contenido de la bienvenida que aparece en el Layout -->
+<div id="bienvenida" class="overlay" style="display: @(mostrarHero ? "block" : "none")">
+    <div class="overlay-content">
+        <h1 class="silver-text">¡Grandes Noticias!</h1>
+        <p>Has sido invitado a una noche mágica que quedará en tu memoria:</p>
+        <h2 class="highlight">Los 15 años de Abi</h2>
+        <button id="btnContinuar" class="btn-main" @onclick="MostrarContenido">Ver Invitación</button>
+    </div>
+</div>
+
+<!-- Contenedor de partículas (confeti) -->
+<div class="particle-container" style="display: @(mostrarHero || mostrarContenido ? "block" : "none");">
+    @foreach (var particle in particles)
+    {
+        <div class="particle" style="left: @particle.X%; top: @particle.Y%; animation-duration: @particle.Duration + 's';"></div>
+    }
+</div>
+
+<!-- Sección Hero -->
+<section id="hero" class="hero" style="display: @(mostrarHero && !mostrarContenido ? "block" : "none")">
+    <h1>¡Te invito a mis 15 años!</h1>
+    <button id="btnVerInvitacion" class="btn-main" @onclick="MostrarContenido">Ver invitación</button>
+</section>
+
+<!-- Aquí cargamos el contenido de la página -->
+@Body
+
+@code {
+    private bool mostrarHero = true; // Controla si la vista de bienvenida está visible
+    private bool mostrarContenido = false; // Controla si la vista con la invitación y confeti está visible
+    private List<Particle> particles = new List<Particle>(); // Lista de partículas para el confeti
+
+    private void MostrarContenido()
+    {
+        mostrarHero = false; // Ocultar la sección de bienvenida
+        mostrarContenido = true; // Mostrar el contenido de la invitación
+        TriggerConfetti(); // Llama a la función para mostrar el confeti
+        NavigationManager.NavigateTo("/"); // Redirige a la página de inicio (home)
+    }
+
+    private void TriggerConfetti()
+    {
+        var rand = new Random();
+        for (int i = 0; i < 100; i++)
+        {
+            particles.Add(new Particle
+                {
+                    X = rand.Next(0, 100),
+                    Y = rand.Next(0, 100),
+                    Duration = rand.Next(1, 3) // Duración aleatoria de la animación
+                });
+        }
+
+        StateHasChanged(); // Forza el renderizado de la vista
+    }
+
+    public class Particle
+    {
+        public int X { get; set; }
+        public int Y { get; set; }
+        public int Duration { get; set; }
+    }
+}
+<footer class="footer" style="background-color: #001f3f; color: white; padding: 1rem; text-align: center; border-top: 3px solid #3949ab;">
+    <div class="container">
+       
+        <p style="font-family: 'Lora', serif; font-size: 0.9rem;">
+            &copy; Los 15 dee Abi - 2025 | Todos los derechos reservados. <br>
+           
+        </p>
+    </div>
+</footer>

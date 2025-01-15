@@ -1,0 +1,200 @@
+﻿@page "/"
+@inject IJSRuntime JSRuntime
+
+
+<!-- Sección Inicial de la Invitación -->
+<section id="contenido" class="contenido">
+    <header class="bg-primary text-white text-center py-4" style="background: linear-gradient(to right, #001f3f, #3949ab); color: #fff; padding: 2rem; border-radius: 15px;">
+        <h1 class="special-title" style="font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: bold;">¡Estás invitado a mi noche especial!</h1>
+        <p class="lead" style="font-family: 'Roboto', sans-serif; font-size: 1.2rem; margin-top: 0.5rem;">22 de febrero de 2025 | <span style="font-style: italic;">Quinta La Escondida</span></p>
+    </header>
+
+    <main class="container mt-4" style="background: rgba(25, 25, 112, 0.6); padding: 2rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);">
+        <p class="invitation-text" style="font-family: 'Lora', serif; font-size: 1.2rem; line-height: 1.8; text-align: justify; color: #f5f5f5;">
+            Hola, soy Abi y quiero invitarte a celebrar mis 15 años. El 22 de febrero será una noche que nunca olvidaré, ¡y me encantaría que estés ahí para compartirla conmigo!
+            Habrá música, sorpresas y mucha diversión. Será una fiesta llena de momentos especiales, y tu presencia hará que sea aún más inolvidable.
+        </p>
+
+        <div style="position: relative; text-align: center; margin-top: 2rem; overflow: hidden; border-radius: 15px;">
+            <img src="/images/abi1.jpg" alt="Abi" style="width: 100%; max-width: 900px; height: auto; filter: brightness(0.9) contrast(1.1);">
+            <div style="position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%); background: rgba(255, 255, 255, 0.8); padding: 0.3rem 0.8rem; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); max-width: 90%; font-size: 0.9rem;">
+                <span style="font-family: 'Lora', serif; font-size: 1rem; color: #333; word-wrap: break-word;">"Un momento inolvidable con vos lo hace aún más especial"</span>
+            </div>
+        </div>
+
+        <button @onclick="MostrarDetalles" class="btn btn-light mt-3" style="font-size: 1.1rem; padding: 0.8rem 1.5rem; background-color: #3949ab; color: #fff; border-radius: 5px;">Ver detalles</button>
+    </main>
+</section>
+
+@if (mostrarDetalles)
+{
+    <div id="detalles" class="section">
+        <div id="detalles" class="section">
+            <h2>Detalles del Evento</h2>
+            <p>📅 Fecha: <strong>22 de febrero de 2025</strong></p>
+            <p>📍 Ubicación: <strong>Cabo 2do Ricardo Ramírez esquina Víctor Guerrero S/N, Presidente Derqui</strong></p>
+            <button class="btn-mapa" @onclick="AbrirMapa">Cómo llegar</button>
+            
+        </div>
+
+
+        <div id="agenda" class="section">
+            <h2>Agenda del Evento</h2>
+            <ul>
+                <li>9:00 PM - Recepción</li>
+                <li>10:00 PM - Cena</li>
+                <li>∞ - Baile</li>
+            </ul>
+        </div>
+
+        <div id="rsvp" class="section">
+            <h2>RSVP</h2>
+            <p>Confirma tu asistencia antes del 4 de febrero de 2025.</p>
+            <div id="formularioAsistencia">
+                <div class="iframe-container">
+                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScORAq3Kb5XxR8TfKF0Oxp2ugEaR1Dx_DFrTSS49cxx9Z4oJg/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
+                </div>
+            </div>
+        </div>
+
+        <div id="galeria" class="section">
+            <div class="gallery">
+                <h2>15 Años de Recuerdos, Amor y Aventuras</h2>
+                <div class="carousel">
+    @for (int i = 1; i <= totalImagenes; i++)  
+    {
+        <div class="slide" style="display: @(i == imagenActual ? "block" : "none")">
+            <img src="@($"/Images/foto{i}.jpg")" alt="Imagen @i" style="width: 100%; max-width: 900px; height: auto;">
+            <div class="frase">@frases[i - 1]</div>  
+        </div>
+    }
+
+    <!-- Botones de navegación -->
+    <button class="prev" @onclick="MostrarAnterior">Anterior</button>
+    <button class="next" @onclick="MostrarSiguiente">Siguiente</button>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div id="regalos" class="seccion-regalos">
+            <div class="contenido-regalos">
+                <h2 class="titulo-regalos">"Si desean sorprenderme con algo más que su preciada presencia..."</h2>
+                <div class="gift-container">
+                    <div class="gift-box">
+                        <div class="lid"></div>
+                        <div class="box"></div>
+                        <div class="ribbon ribbon-vertical"></div>
+                        <div class="ribbon ribbon-horizontal"></div>
+                        <div class="sparkles">
+                            <div class="sparkle"></div>
+                            <div class="sparkle"></div>
+                            <div class="sparkle"></div>
+                        </div>
+                    </div>
+                </div>
+                <p class="descripcion-regalos">
+                    Aquí les dejo los detalles, en caso de que quieran hacerme un pequeño regalo:
+                </p>
+                <div class="informacion-regalos">
+                    <p>
+                        <strong>Alias:</strong> <span id="alias">AbiAlive2005</span>
+                    </p>
+                    <p>
+                        <strong>CBU:</strong> <span id="cbu">0000003100056286252910</span>
+                    </p>
+                    <p><strong>Abi Nahir Valdéz</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="final-message" class="section" style="text-align: center; padding: 2rem; background-color: rgba(0, 0, 0, 0.1); border-radius: 10px; margin-top: 2rem;">
+            <p style="font-family: 'Lora', serif; font-size: 1.5rem; color: #333; line-height: 1.6;">
+                Espero que puedas acompañarnos en este día tan especial, porque sin ti, la celebración no será completa. ¡No faltes! 💫
+            </p>
+        </div>
+    </div>
+}
+
+
+
+<div class="butterflies">
+    <img src="/images/butterfly1.png" alt="Mariposa" class="butterfly">
+    <img src="/images/Butterfly2.png" alt="Mariposa" class="butterfly">
+    <img src="/images/fairy2.png" alt="Mariposa" class="butterfly">
+    <img src="/images/facopia.png" alt="Mariposa" class="butterfly">
+    <img src="/images/Butterfly1.png" alt="Mariposa" class="butterfly">
+</div>
+<script>
+    function abrirMapa() {
+        // Reemplaza la URL con la que desees usar para abrir el mapa
+        window.open('', '_blank');
+    }
+
+    {
+
+</script>
+@code {
+        private bool mostrarDetalles = false;
+
+        private void MostrarDetalles()
+        {
+            mostrarDetalles = !mostrarDetalles;
+        }
+    
+    
+
+    private void CopiarAlPortapapeles(string texto)
+    {
+        JSRuntime.InvokeVoidAsync("navigator.clipboard.writeText", texto);
+    }
+
+    private async Task AbrirMapa()
+    {
+        // Llamar a la función JavaScript 'abrirMapa'
+        await JSRuntime.InvokeVoidAsync("abrirMapa");
+    }
+
+    private int imagenActual = 1;  // La imagen que se está mostrando actualmente (inicia en la imagen 1)
+    private int totalImagenes = 10; // Total de imágenes que hay en el carrusel (ajusta según el número de imágenes que tengas)
+    private List<string> frases = new List<string>
+    {
+        "Cada paso que das nos llena de alegría y amor ❤️",
+        "El tiempo vuela, pero tu esencia sigue intacta... ¡Qué emoción verte crecer! 💫",
+        "Los mejores momentos siempre están rodeados de quienes más amamos ❤️",
+        "Aunque crecemos, siempre seremos un equipo. Mis hermanas son mis compañeras de vida, ¡y qué suerte tengo de tenerlas! 👭",
+        "La risa compartida y el amor hacen que cada día sea especial. Juntas, ¡somos imparables! 💕",
+        "15 años llenos de historias, sonrisas y desafíos. Gracias por estar a mi lado en cada uno de ellos",
+        "La vida es un camino de aprendizajes y aventuras, y estoy lista para vivir cada momento con el corazón lleno de gratitud",
+        "Los sueños se construyen paso a paso, y este es solo el comienzo de muchos más. 🌠",
+        "A cada paso, me doy cuenta de cuánto he crecido y lo feliz que me hace compartir este viaje con todos ustedes. ✨",
+        "Hoy celebro todo lo que soy y todo lo que me espera. ¡El futuro es brillante! 🌟"
+    };  // Lista de frases asociadas a cada imagen
+
+    private void MostrarSiguiente()
+    {
+        if (imagenActual < totalImagenes)
+        {
+            imagenActual++;
+        }
+        else
+        {
+            imagenActual = 1;  // Si llegamos al final, volvemos a la primera imagen
+        }
+    }
+
+    private void MostrarAnterior()
+    {
+        if (imagenActual > 1)
+        {
+            imagenActual--;
+        }
+        else
+        {
+            imagenActual = totalImagenes;  // Si estamos en la primera, vamos a la última imagen
+        }
+    }
+}
+

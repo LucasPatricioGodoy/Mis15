@@ -1,0 +1,332 @@
+/* Fondo del overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: url('/images/night-sky.jpg') no-repeat center center/cover;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    opacity: 1;
+    visibility: visible;
+    overflow: hidden;
+}
+
+/* Contenedor del texto con fondo semitransparente */
+.overlay-content {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.6); /* Fondo negro semitransparente */
+    padding: 20px 40px;
+    border-radius: 10px;
+    animation: fadeIn 1s ease;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Efectos de partículas */
+.particle-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+    animation: particleAnimation 1s ease-in-out infinite;
+}
+
+@keyframes particleAnimation {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Texto plateado */
+.silver-text {
+    font-size: 3rem;
+    font-weight: bold;
+    background: linear-gradient(90deg, #c0c0c0, #d9d9d9, #e6e6e6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 10px rgba(192, 192, 192, 0.8), 0 0 20px rgba(192, 192, 192, 0.6);
+    margin-bottom: 20px;
+}
+
+/* Botón de bienvenida */
+.btn-main {
+    background-color: #c0c0c0;
+    color: black;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    box-shadow: 0 5px 15px rgba(192, 192, 192, 0.5);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+    .btn-main:hover {
+        background-color: #d9d9d9;
+        transform: scale(1.1);
+    }
+
+/* Ocultar overlay */
+.overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Estilos para la sección de contenido */
+#contenido {
+    font-family: 'Lora', serif;
+}
+
+/* Título especial */
+.special-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #d4af37; /* Dorado elegante */
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.invitation-text {
+    font-family: 'Lora', serif;
+    font-size: 1.2rem;
+    color: #4a4a4a;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+/* Fondo y estilo para el header */
+header.bg-primary {
+    background: linear-gradient(to right, #001f3f, #3949ab);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    color: #fff;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.hero h1 {
+    font-size: 3em;
+    font-family: 'Lora', serif;
+    color: #c0c0c0; /* Plateado */
+    background: linear-gradient(90deg, #c0c0c0, #e6e6e6, #c0c0c0);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s infinite;
+    text-shadow: 0 0 10px rgba(192, 192, 192, 0.8), 0 0 20px rgba(192, 192, 192, 0.6);
+}
+
+/* Hero section */
+.hero {
+    padding: 100px 20px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+    .hero .lead {
+        font-size: 1.2em;
+    }
+
+    .hero .btn-main {
+        background-color: #c0c0c0;
+        color: #1e1e4f; /* Azul noche */
+        padding: 10px 20px;
+        border: none;
+        border-radius: 25px;
+        text-decoration: none;
+        font-size: 1.1em;
+        transition: background-color 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .hero .btn-main:hover {
+            background-color: #d9d9d9;
+        }
+
+/* Sección visible con animación */
+.section {
+    padding: 40px 20px;
+    margin-top: 100px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    color: #fff;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+    .section.visible {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+@keyframes fadeInSection {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Estilos para las secciones que serán visibles */
+.section {
+    animation: fadeInSection 1s ease-out forwards;
+}
+
+/* Animación para mariposas */
+.butterfly {
+    position: absolute;
+    width: 50px;
+    animation: fly 20s linear infinite;
+}
+
+@keyframes fly {
+    0% {
+        transform: translate(-10vw, 100vh) rotate(0deg);
+    }
+
+    50% {
+        transform: translate(50vw, 50vh) rotate(20deg);
+    }
+
+    100% {
+        transform: translate(110vw, -10vh) rotate(-10deg);
+    }
+}
+
+/* Animaciones específicas para mariposas */
+.butterfly:nth-child(1) {
+    width: 40px;
+    animation: fly1 20s linear infinite;
+    top: 20%;
+    left: 5%;
+}
+
+.butterfly:nth-child(2) {
+    width: 60px;
+    animation: fly2 22s linear infinite;
+    top: 10%;
+    left: 80%;
+}
+
+.butterfly:nth-child(3) {
+    width: 45px;
+    animation: fly3 18s linear infinite;
+    top: 50%;
+    left: 20%;
+}
+
+.butterfly:nth-child(4) {
+    width: 55px;
+    animation: fly4 24s linear infinite;
+    top: 70%;
+    left: 60%;
+}
+
+.butterfly:nth-child(5) {
+    width: 50px;
+    animation: fly5 20s linear infinite;
+    top: 30%;
+    left: 40%;
+}
+
+@keyframes fly1 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(50vw, -20vh);
+    }
+
+    50% {
+        transform: translate(20vw, 30vh);
+    }
+
+    75% {
+        transform: translate(70vw, -40vh);
+    }
+
+    100% {
+        transform: translate(100vw, 0);
+    }
+}
+
+/* Estilos generales para la sección RSVP */
+#rsvp {
+    text-align: center;
+    padding: 2rem 1rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin: 1rem auto;
+    max-width: 90%;
+}
+
+/* Estilos para iframe */
+.iframe-container iframe {
+    width: 100%;
+    max-width: 600px;
+    height: 500px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.footer {
+    background-color: #001f3f;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    border-top: 3px solid #3949ab;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
