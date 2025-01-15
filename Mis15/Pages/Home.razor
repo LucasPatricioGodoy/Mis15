@@ -151,10 +151,10 @@
         JSRuntime.InvokeVoidAsync("navigator.clipboard.writeText", texto);
     }
 
-    private async Task AbrirMapa()
+    private void AbrirMapa()
     {
-        // Llamar a la función JavaScript 'abrirMapa'
-        await JSRuntime.InvokeVoidAsync("abrirMapa");
+        var url = "https://maps.app.goo.gl/Fz2ufWVi44Cp2cTn8";
+        JSRuntime.InvokeVoidAsync("open", url);
     }
 
     private int imagenActual = 1;  // La imagen que se está mostrando actualmente (inicia en la imagen 1)
